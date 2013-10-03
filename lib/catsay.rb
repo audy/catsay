@@ -1,8 +1,5 @@
 require 'erb'
 
-require 'bundler'
-Bundler.require
-
 # this is real ugly
 includes = %w{cat exceptions}
 
