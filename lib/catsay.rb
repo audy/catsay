@@ -110,7 +110,6 @@ module Catsay
         opts.banner = "usage: catsay ..."
 
         opts.on('-c', '--cat [TEMPLATE]', 'Chooses the cat.') do |cat|
-          p cat
           options[:cat] = cat.to_sym || :default
         end
 
