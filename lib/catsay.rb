@@ -87,7 +87,7 @@ module Catsay
     # in the cats/ directory minus the cats/ and
     # .erb extension
     def template_path_for(template_id)
-      File.join('cats', "#{template_id}.erb")
+      File.join(File.expand_path(File.dirname(__FILE__)), '..', 'cats', "#{template_id}.erb")
     end
 
     # fetches the input by first looking for
