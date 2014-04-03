@@ -14,4 +14,5 @@ Gem::Specification.new do |s|
                    'cats/test.erb'
                   ]
   s.homepage    = 'https://github.com/audy/catsay'
+  s.executables << 'catsay'
 end
