@@ -2,11 +2,10 @@ source 'https://rubygems.org'
 
 gem 'bundler'
 
-group :development do
+group :development, :test do
   gem 'rake'
 end
 
 group :test do
-  gem 'rake'
   gem 'rspec'
 end
