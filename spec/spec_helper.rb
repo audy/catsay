@@ -8,6 +8,8 @@ require 'catsay'
 
 Bundler.require :test, :development
 
+Coveralls.wear!
+
 RSpec.configure do |config|
 
 end

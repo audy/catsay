@@ -8,4 +8,5 @@ end
 
 group :test do
   gem 'rspec'
+  gem 'coveralls'
 end
