@@ -14,3 +14,9 @@ Hello, world!
      |,4-  ) )-,_..;\ (  `'-'
     '---''(_/--'  `-'\_)
 ```
+
+## Installation
+
+Test using Ruby 1.8.7 or 1.9.3:
+
+`(sudo) gem install catsay`
