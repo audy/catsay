@@ -1,11 +1,9 @@
 require 'erb'
 
-# this is real ugly
-includes = %w{cat exceptions}
+$:.unshift File.expand_path(File.dirname(__FILE__))
 
-includes.each do |inc|
-  require File.expand_path(File.join(File.dirname(__FILE__), inc))
-end
+require 'cat'
+require 'exceptions'
 
 module Catsay
 
