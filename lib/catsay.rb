@@ -21,7 +21,9 @@ module Catsay
         p @options
       end
 
-      cat = @options[:cat]
+      if @options[:cat] == :random
+        @options[:cat] = cats.sample
+      end
 
       output_handle.puts Cat.new(:template => template).meow(message)
     end
@@ -86,6 +88,11 @@ module Catsay
     # .erb extension
     def template_path_for(template_id)
       File.join(File.expand_path(File.dirname(__FILE__)), '..', 'cats', "#{template_id}.erb")
+    end
+
+    def cats
+      catfiles = Dir[File.join(File.expand_path(File.dirname(__FILE__)), '..', 'cats', '*.erb')]
+      catfiles.map! { |x| File.basename(x, '.erb') }
     end
 
     # fetches the input by first looking for
