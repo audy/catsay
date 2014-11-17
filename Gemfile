@@ -1,8 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'bundler'
-
 group :development, :test do
+  gem 'bundler'
   gem 'rake'
 end
 
