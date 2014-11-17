@@ -11,7 +11,10 @@ Gem::Specification.new do |s|
                    'lib/catsay.rb',
                    'lib/exceptions.rb',
                    'cats/default.erb',
-                   'cats/test.erb'
+                   'cats/test.erb',
+                   'cats/mini.erb',
+                   'cats/emoji.erb',
+                   'cats/octocat.erb'
                   ]
   s.homepage    = 'https://github.com/audy/catsay'
   s.executables << 'catsay'
