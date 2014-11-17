@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.files       = ['bin/catsay',
                    'lib/cat.rb',
                    'lib/catsay.rb',
-                   'lib/exceptions.rb',
+                   'lib/exceptions.rb'
                   ]
 
   s.files.concat  `git ls-files cats/*.erb`.split("\n")
