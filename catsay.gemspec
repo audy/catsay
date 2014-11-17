@@ -6,17 +6,15 @@ Gem::Specification.new do |s|
   s.description = 'Like cowsay but with cats'
   s.authors     = ['Austin G. Davis-Richardson']
   s.email       = 'harekrishna@gmail.com'
+
   s.files       = ['bin/catsay',
                    'lib/cat.rb',
                    'lib/catsay.rb',
                    'lib/exceptions.rb',
-                   'cats/default.erb',
-                   'cats/test.erb',
-                   'cats/mini.erb',
-                   'cats/emoji.erb',
-                   'cats/octocat.erb'
-                   'cats/longcat.erb'
                   ]
+
+  s.files.concat  `git ls-files cats/*.erb`.split("\n")
+
   s.homepage    = 'https://github.com/audy/catsay'
   s.executables << 'catsay'
   s.cert_chain  = ['certs/audy.pem']
