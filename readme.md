@@ -31,6 +31,17 @@ $ catsay --cat octocat "Hello, World!"
 
 `gem install catsay -P HighSecurity`
 
+## Usage
+
+```
+usage: catsay ...
+    -c, --cat [TEMPLATE]             Chooses the cat.
+    -o, --out [OUTFILE]              Output file (default=/dev/stdout)
+    -i, --in [INFILE]                Input file (default=/dev/stdin)
+    -l, --list                       List cats and exit
+    -e, --verbose                    Annoying kitty
+```
+
 ## Contributing
 
 This gem needs more cats! To add a cat, create an `erb` file in the `cats/`

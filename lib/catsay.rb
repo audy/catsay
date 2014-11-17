@@ -1,4 +1,5 @@
 require 'erb'
+require 'set'
 
 $:.unshift File.expand_path(File.dirname(__FILE__))
 
@@ -19,6 +20,20 @@ module Catsay
 
       if @options[:verbose]
         p @options
+      end
+
+      # list cats and exits 0 if there are cats, 1 if not.
+      if @options[:list]
+        puts 'these are the cats I know:'
+        cats.each do |cat|
+          puts "- #{cat}"
+        end
+
+        if cats.size == 0
+          exit 1 # oh noes!
+        else
+          exit 0
+        end
       end
 
       if @options[:cat] == :random
@@ -92,7 +107,7 @@ module Catsay
 
     def cats
       catfiles = Dir[File.join(File.expand_path(File.dirname(__FILE__)), '..', 'cats', '*.erb')]
-      catfiles.map! { |x| File.basename(x, '.erb') }
+      catfiles.map! { |x| File.basename(x, '.erb') }.to_set
     end
 
     # fetches the input by first looking for
@@ -124,6 +139,10 @@ module Catsay
 
         opts.on('-i', '--in [INFILE]', 'Input file (default=/dev/stdin)') do |input|
           options[:input] = input
+        end
+
+        opts.on('-l', '--list', 'List cats and exit') do |list|
+          options[:list] = true
         end
 
         opts.on('-e', '--verbose', 'Annoying kitty') do |verbose|
