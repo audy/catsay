@@ -15,4 +15,6 @@ Gem::Specification.new do |s|
                   ]
   s.homepage    = 'https://github.com/audy/catsay'
   s.executables << 'catsay'
+  s.cert_chain  = ['certs/audy.pem']
+  s.signing_key = File.expand_path('~/.ssh/gem-private_key.pem') if $0 =~ /gem\z/
 end
