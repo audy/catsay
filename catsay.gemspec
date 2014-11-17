@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'catsay'
-  s.version     = '0.2.2'
+  s.version     = '0.2.3'
   s.licenses    = ['MIT']
   s.summary     = 'Cats in your terminal'
   s.description = 'Like cowsay but with cats'
@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
                    'cats/mini.erb',
                    'cats/emoji.erb',
                    'cats/octocat.erb'
+                   'cats/longcat.erb'
                   ]
   s.homepage    = 'https://github.com/audy/catsay'
   s.executables << 'catsay'
