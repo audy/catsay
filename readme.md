@@ -3,49 +3,37 @@
 A clone of cowsay but for cats, in Ruby.
 
 ```
-$ catsay "Hello, world!"
-
-Hello, world!
-   O
-      o
-
-      |\      _,,,---,,_
-      /,`.-'`'    -.  ;-;;,_
-     |,4-  ) )-,_..;\ (  `'-'
-    '---''(_/--'  `-'\_)
+$ catsay --cat octocat "Hello, world!"
+               MMM.           .MMM
+               MMMMMMMMMMMMMMMMMMM
+               MMMMMMMMMMMMMMMMMMM
+              MMMMMMMMMMMMMMMMMMMMM
+             MMMMMMMMMMMMMMMMMMMMMMM
+            MMMMMMMMMMMMMMMMMMMMMMMM    hello, world!
+            MMMM::- -:::::::- -::MMMM    |/
+             MM~:~   ~:::::~   ~:~MM
+        .. MMMMM::. .:::+:::. .::MMMMM ..
+              .MM::::: ._. :::::MM.
+                 MMMM;:::::;MMMM
+          -MM        MMMMMMM
+          ^  M+     MMMMMMMMM
+              MMMMMMM MM MM MM
+                   MM MM MM MM
+                   MM MM MM MM
+                .~~MM~MM~MM~MM~~.
+             ~~~~MM:~MM~~~MM~:MM~~~~
+            ~~~~~~==~==~~~==~==~~~~~~
+             ~~~~~~==~==~==~==~~~~~~
+                 :~==~==~==~==~~
 ```
 
 ## Installation
 
-Test using Ruby 1.8.7 or 1.9.3:
-
-`(sudo) gem install catsay`
+`gem install catsay -P HighSecurity`
 
 ## Contributing
 
-I need cats.
-
-1. Create a new erb file in `cats/`
-
-For example:
-
-`cats/newcat.erb`
-
-Where `newcat` is the `newcat` in `catsay --cat newcat`
-
-Draw an ascii cat with `<= @message =>` where the text will go.
-
-For example `cats/default.erb`:
-
-```erb
-<%= @message %>
-   O
-      o
-
-      |\      _,,,---,,_
-      /,`.-'`'    -.  ;-;;,_
-     |,4-  ) )-,_..;\ (  `'-'
-    '---''(_/--'  `-'\_)
-```
-
-Then send me a pull request.
+This gem needs more cats! To add a cat, create an `erb` file in the `cats/`
+directory. This file is just a text file. Add your cat and include the special
+string `<%= @message %>` wherever you want the message to go. Then send me a
+pull-request.
