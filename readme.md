@@ -3,13 +3,13 @@
 A clone of cowsay but for cats, in Ruby.
 
 ```
-$ catsay --cat octocat "Hello, world!"
+$ catsay --cat octocat "Hello, World!"
                MMM.           .MMM
                MMMMMMMMMMMMMMMMMMM
                MMMMMMMMMMMMMMMMMMM
               MMMMMMMMMMMMMMMMMMMMM
              MMMMMMMMMMMMMMMMMMMMMMM
-            MMMMMMMMMMMMMMMMMMMMMMMM    hello, world!
+            MMMMMMMMMMMMMMMMMMMMMMMM    hello, World!
             MMMM::- -:::::::- -::MMMM    |/
              MM~:~   ~:::::~   ~:~MM
         .. MMMMM::. .:::+:::. .::MMMMM ..
