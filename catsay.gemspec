@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'catsay'
-  s.version     = '0.1.0'
+  s.version     = '0.1.1'
   s.licenses    = ['MIT']
   s.summary     = 'Cats in your terminal'
   s.description = 'Like cowsay but with cats'
