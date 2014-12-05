@@ -37,7 +37,7 @@ module Catsay
       end
 
       if @options[:cat] == :random
-        @options[:cat] = cats.sample
+        @options[:cat] = cats.to_a.sample
       end
 
       output_handle.puts Cat.new(:template => template).meow(message)
