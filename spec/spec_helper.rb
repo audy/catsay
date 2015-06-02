@@ -2,7 +2,7 @@ require 'bundler'
 
 require 'tempfile'
 
-$:.unshift File.join(File.dirname(__FILE__), '..')
+$LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..')
 
 require 'catsay'
 
@@ -10,6 +10,5 @@ Bundler.require :test, :development
 
 Coveralls.wear!
 
-RSpec.configure do |config|
-
+RSpec.configure do |_config|
 end

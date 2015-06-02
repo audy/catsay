@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe 'CatSay::Cli' do
-
   let (:cli) { Catsay::CLI }
 
   it 'can list cats (through API)' do
@@ -16,11 +15,9 @@ describe 'CatSay::Cli' do
     expect(cli.cats).to_not be_empty
     expect(cli.cats.size).to eq(Dir['cats/*.erb'].size)
   end
-
 end
 
 describe 'command-line interface' do
-
   it 'can list cats (through CLI)' do
     `bin/catsay --list`.should_not be_nil
   end

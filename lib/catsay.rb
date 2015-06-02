@@ -1,88 +1,85 @@
 require 'erb'
 require 'set'
 
-$:.unshift File.expand_path(File.dirname(__FILE__))
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__))
 
 require 'cat'
 require 'exceptions'
 
 module Catsay
-
   # handle CLI stuff
   class CLI
-  class << self
+    class << self
+      # - parses command-line arguments
+      # - finds the cat and makes it meow
+      #   (or gives an error)
+      def run!
+        @options = parse_arguments
 
-    # - parses command-line arguments
-    # - finds the cat and makes it meow
-    #   (or gives an error)
-    def run!
-      @options = parse_arguments
-
-      if @options[:verbose]
-        p @options
-      end
-
-      # list cats and exits 0 if there are cats, 1 if not.
-      if @options[:list]
-        puts 'these are the cats I know:'
-        cats.each do |cat|
-          puts "- #{cat}"
+        if @options[:verbose]
+          p @options
         end
 
-        if cats.size == 0
-          exit 1 # oh noes!
+        # list cats and exits 0 if there are cats, 1 if not.
+        if @options[:list]
+          puts 'these are the cats I know:'
+          cats.each do |cat|
+            puts "- #{cat}"
+          end
+
+          if cats.size == 0
+            exit 1 # oh noes!
+          else
+            exit 0
+          end
+        end
+
+        if @options[:cat] == :random
+          @options[:cat] = cats.to_a.sample
+        end
+
+        output_handle.puts Cat.new(template: template).meow(message)
+      end
+
+      def cats
+        catfiles = Dir[File.join(File.expand_path(File.dirname(__FILE__)), '..', 'cats', '*.erb')]
+        catfiles.map! { |x| File.basename(x, '.erb') }.to_set
+      end
+
+      private
+
+      # returns a file handle for the input
+      # if there is one or returns nil
+      def input_handle
+        if !@options[:message].nil?
+          nil
+        elsif @options[:input]
+          begin
+            File.open(@options[:input])
+          rescue Errno::ENOENT
+            $stderr.puts "no such file #{@options[:input]}"
+            exit -1
+          end
         else
-          exit 0
+          $stdin
         end
       end
 
-      if @options[:cat] == :random
-        @options[:cat] = cats.to_a.sample
-      end
-
-      output_handle.puts Cat.new(:template => template).meow(message)
-    end
-
-    def cats
-      catfiles = Dir[File.join(File.expand_path(File.dirname(__FILE__)), '..', 'cats', '*.erb')]
-      catfiles.map! { |x| File.basename(x, '.erb') }.to_set
-    end
-
-    private
-
-    # returns a file handle for the input
-    # if there is one or returns nil
-    def input_handle
-      if @options[:message] != nil
-        nil
-      elsif @options[:input]
-        begin
-          File.open(@options[:input])
-        rescue Errno::ENOENT
-          $stderr.puts "no such file #{@options[:input]}"
-          exit -1
+      # check if output is a string
+      # if so, open it because that's probably a filename
+      # otherwise, just return $stdout
+      def output_handle
+        if @options[:output].is_a? String
+          File.open(@options[:output], 'w')
+        else
+          $stdout
         end
-      else
-        $stdin
       end
-    end
 
-    # check if output is a string
-    # if so, open it because that's probably a filename
-    # otherwise, just return $stdout
-    def output_handle
-      if @options[:output].is_a? String
-        File.open(@options[:output], 'w')
-      else
-        $stdout
-      end
-    end
-
-    # Given a symbol for a cat template, check if it
-    # exists. If it does, return the cat template, otherwise
-    # exits with an error
-    def template
-      begin
+      # Given a symbol for a cat template, check if it
+      # exists. If it does, return the cat template, otherwise
+      # exits with an error
+      def template
         heisenberg?(@options[:cat])
       rescue DeadKitty
         $stderr.puts "I haven't met a kitty named \"#{@options[:cat]}\" yet."
@@ -90,79 +87,73 @@ module Catsay
       else
         File.read(template_path_for(@options[:cat]))
       end
-    end
 
-    # checks if a template exists given a template id
-    # if not, raises DeadKitty exception.
-    def heisenberg?(cat)
-      if File.exists? template_path_for(cat)
-        cat
-      else
-        raise DeadKitty
+      # checks if a template exists given a template id
+      # if not, raises DeadKitty exception.
+      def heisenberg?(cat)
+        if File.exist? template_path_for(cat)
+          cat
+        else
+          fail DeadKitty
+        end
       end
-    end
 
-    # returns the file path given a template id
-    # the template id should be the name of the file
-    # in the cats/ directory minus the cats/ and
-    # .erb extension
-    def template_path_for(template_id)
-      File.join(File.expand_path(File.dirname(__FILE__)), '..', 'cats', "#{template_id}.erb")
-    end
-
-    # fetches the input by first looking for
-    # an input handle and then looking for
-    # options[:text] (text specified after arguments)
-    def message
-      if input_handle.nil?
-        @options[:message]
-      else
-        input_handle.read
+      # returns the file path given a template id
+      # the template id should be the name of the file
+      # in the cats/ directory minus the cats/ and
+      # .erb extension
+      def template_path_for(template_id)
+        File.join(File.expand_path(File.dirname(__FILE__)), '..', 'cats', "#{template_id}.erb")
       end
-    end
 
-    # parses the command-line arguments
-    def parse_arguments
-
-      options = Hash.new
-
-      OptionParser.new do |opts|
-        opts.banner = "usage: catsay ..."
-
-        opts.on('-c', '--cat [TEMPLATE]', 'Chooses the cat.') do |cat|
-          options[:cat] = cat.to_sym || :default
+      # fetches the input by first looking for
+      # an input handle and then looking for
+      # options[:text] (text specified after arguments)
+      def message
+        if input_handle.nil?
+          @options[:message]
+        else
+          input_handle.read
         end
+      end
 
-        opts.on('-o', '--out [OUTFILE]', 'Output file (default=/dev/stdout)') do |output|
-          options[:output] = output
-        end
+      # parses the command-line arguments
+      def parse_arguments
+        options = {}
 
-        opts.on('-i', '--in [INFILE]', 'Input file (default=/dev/stdin)') do |input|
-          options[:input] = input
-        end
+        OptionParser.new do |opts|
+          opts.banner = 'usage: catsay ...'
 
-        opts.on('-l', '--list', 'List cats and exit') do |list|
-          options[:list] = true
-        end
+          opts.on('-c', '--cat [TEMPLATE]', 'Chooses the cat.') do |cat|
+            options[:cat] = cat.to_sym || :default
+          end
 
-        opts.on('-e', '--verbose', 'Annoying kitty') do |verbose|
-          options[:verbose] = verbose
-        end
-      end.parse!
+          opts.on('-o', '--out [OUTFILE]', 'Output file (default=/dev/stdout)') do |output|
+            options[:output] = output
+          end
 
-      # check if there is a message, otherwise set message to nil
-      message = ARGV.join(' ')
-      options[:message] = message ==  "" ? nil : message
+          opts.on('-i', '--in [INFILE]', 'Input file (default=/dev/stdin)') do |input|
+            options[:input] = input
+          end
 
-      # check if there is a cat template, otherwise set to :default
-      options[:cat] = options[:cat] || :default
+          opts.on('-l', '--list', 'List cats and exit') do |_list|
+            options[:list] = true
+          end
 
-      return options
+          opts.on('-e', '--verbose', 'Annoying kitty') do |verbose|
+            options[:verbose] = verbose
+          end
+        end.parse!
 
-    end
+        # check if there is a message, otherwise set message to nil
+        message = ARGV.join(' ')
+        options[:message] = message ==  '' ? nil : message
 
-    end # class << self
+        # check if there is a cat template, otherwise set to :default
+        options[:cat] = options[:cat] || :default
+
+        options
+      end
+      end # class << self
   end
-
-
 end
