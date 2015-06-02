@@ -1,0 +1,15 @@
+<%# source: https://evilzone.org/creative-arts/nyan-cat-ascii/ %>
++      o     +              o   
+    +             o     +       +
+o          +
+    o  +           +        +
++        o     o       +        o
+-_-_-_-_-_-_-_,------,   <%= @message %> 
+_-_-_-_-_-_-_-|   /\_/\  /
+-_-_-_-_-_-_-~|__( ^ .^)  +     +  
+_-_-_-_-_-_-_-""  ""      
++      o         o   +       o
+    +         +
+o        o         o      o     +
+    o           +
++      +     o        o      +    
