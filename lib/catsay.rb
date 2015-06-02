@@ -43,6 +43,11 @@ module Catsay
       output_handle.puts Cat.new(:template => template).meow(message)
     end
 
+    def cats
+      catfiles = Dir[File.join(File.expand_path(File.dirname(__FILE__)), '..', 'cats', '*.erb')]
+      catfiles.map! { |x| File.basename(x, '.erb') }.to_set
+    end
+
     private
 
     # returns a file handle for the input
@@ -103,11 +108,6 @@ module Catsay
     # .erb extension
     def template_path_for(template_id)
       File.join(File.expand_path(File.dirname(__FILE__)), '..', 'cats', "#{template_id}.erb")
-    end
-
-    def cats
-      catfiles = Dir[File.join(File.expand_path(File.dirname(__FILE__)), '..', 'cats', '*.erb')]
-      catfiles.map! { |x| File.basename(x, '.erb') }.to_set
     end
 
     # fetches the input by first looking for

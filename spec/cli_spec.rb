@@ -12,6 +12,11 @@ describe 'CatSay::Cli' do
     expect(cli).to_not be(nil)
   end
 
+  it '#cats lists all cats in cats/' do
+    expect(cli.cats).to_not be_empty
+    expect(cli.cats.size).to eq(Dir['cats/*.erb'].size)
+  end
+
 end
 
 describe 'command-line interface' do
