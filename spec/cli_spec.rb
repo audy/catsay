@@ -1,7 +1,8 @@
 require 'spec_helper'
 
-describe 'CatSay::Cli' do
-  let (:cli) { Catsay::CLI }
+describe 'CatSay::CLI' do
+
+  let(:cli) { Catsay::CLI }
 
   it 'can list cats (through API)' do
     expect(cli.send(:cats).size).to_not be(0)
