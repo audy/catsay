@@ -128,11 +128,15 @@ module Catsay
             options[:cat] = cat.to_sym || :default
           end
 
-          opts.on('-o', '--out [OUTFILE]', 'Output file (default=/dev/stdout)') do |output|
+          opts.on('-o',
+                  '--out [OUTFILE]',
+                  'Output file (default=/dev/stdout)') do |output|
             options[:output] = output
           end
 
-          opts.on('-i', '--in [INFILE]', 'Input file (default=/dev/stdin)') do |input|
+          opts.on('-i',
+                  '--in [INFILE]',
+                  'Input file (default=/dev/stdin)') do |input|
             options[:input] = input
           end
 
