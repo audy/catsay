@@ -3,13 +3,13 @@
 Cats in your `$SHELL`.
 
 ```
-$ catsay --cat octocat "Hello, World!"
+$ catsay --cat octocat "Fork me on GitHub!"
                MMM.           .MMM
                MMMMMMMMMMMMMMMMMMM
                MMMMMMMMMMMMMMMMMMM
               MMMMMMMMMMMMMMMMMMMMM
              MMMMMMMMMMMMMMMMMMMMMMM
-            MMMMMMMMMMMMMMMMMMMMMMMM    hello, World!
+            MMMMMMMMMMMMMMMMMMMMMMMM    Fork me on GitHub!
             MMMM::- -:::::::- -::MMMM    |/
              MM~:~   ~:::::~   ~:~MM
         .. MMMMM::. .:::+:::. .::MMMMM ..
