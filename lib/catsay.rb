@@ -41,8 +41,11 @@ module Catsay
         output_handle.puts Cat.new(template: template).meow(message)
       end
 
+      def catfiles
+        @catfiles ||= Dir.glob(File.join(File.expand_path(File.dirname(__FILE__)), '..', 'cats', '*.erb'))
+      end
+
       def cats
-        catfiles = Dir[File.join(File.expand_path(File.dirname(__FILE__)), '..', 'cats', '*.erb')]
         catfiles.map! { |x| File.basename(x, '.erb') }.to_set
       end
 
