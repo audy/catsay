@@ -5,6 +5,6 @@ describe Catsay do
   let(:message) { 'Meow, world!' }
 
   it 'can meow a message' do
-    kitty.meow(message).strip.should == message
+    expect(kitty.meow(message).strip).to eq(message)
   end
 end

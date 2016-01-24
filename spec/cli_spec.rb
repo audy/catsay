@@ -20,14 +20,14 @@ end
 
 describe 'command-line interface' do
   it 'can list cats (through CLI)' do
-    `bin/catsay --list`.should_not be_nil
+    expect(`bin/catsay --list`).to_not be_nil
   end
 
   it 'displays the help' do
-    `bin/catsay --help`.should_not be_nil
+    expect(`bin/catsay --help`).to_not be_nil
   end
 
   it 'can display a cat' do
-    `bin/catsay --cat test test`.strip.should == 'A kitty meows, "test"'
+    expect(`bin/catsay --cat test test`.strip).to eq('A kitty meows, "test"')
   end
 end
