@@ -1,6 +1,6 @@
 # Catsay [![Build Status](https://secure.travis-ci.org/audy/catsay.png?branch=master)](http://travis-ci.org/audy/catsay) [![Coverage Status](https://coveralls.io/repos/audy/catsay/badge.png)](https://coveralls.io/r/audy/catsay) [![Code Climate](https://codeclimate.com/github/audy/catsay.png)](https://codeclimate.com/github/audy/catsay) [![security](https://hakiri.io/github/audy/catsay/master.svg)](https://hakiri.io/github/audy/catsay/master)
 
-Cats in your `$SHELL`.
+Cats in your `$SHELL`. Pairs well with [lolcat](https://github.com/busyloop/lolcat).
 
 ```
 $ catsay --cat octocat "Fork me on GitHub!"
