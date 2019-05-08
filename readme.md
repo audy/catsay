@@ -31,10 +31,6 @@ $ catsay --cat octocat "Fork me on GitHub!"
 
 `gem install catsay`
 
-Or, if you have added `certs/audy.pem`:
-
-`gem install catsay -P HighSecurity`
-
 ## Usage
 
 ```
